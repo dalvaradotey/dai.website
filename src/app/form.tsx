@@ -2,13 +2,14 @@
 import { useState } from "react";
 import Image from 'next/image'
 import LoadGif from '../../public/load.gif';
+import { AudioContext, OfflineAudioContext } from 'standardized-audio-context';
  // this is a client component 👈🏽
 
 const Form = () => {
   const [promptText, setPromptText] = useState<any>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isPlayAudio, setIsPlayAudio] = useState<boolean>(false);
-  console.log('ENV => ', process?.env?.API_URL);
+
   const getResponse = async() => {
     setIsLoading(true);
     const response = await fetch(`${process?.env?.API_URL}/questions`, {
@@ -23,6 +24,8 @@ const Form = () => {
 
     const audioBuffer = await response.arrayBuffer();
     const ctx = new AudioContext();
+    //await ctx.resume();
+    //await ctx.createGain();
     const decodedAudio = await ctx.decodeAudioData(audioBuffer);
     const playSound = await ctx.createBufferSource();
     playSound.buffer = decodedAudio;
