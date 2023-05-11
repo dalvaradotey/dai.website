@@ -3,25 +3,18 @@ import { useState } from "react";
 import Image from 'next/image'
 import LoadGif from '../../public/load.gif';
 import { AudioContext, OfflineAudioContext } from 'standardized-audio-context';
- // this is a client component 👈🏽
+import QuestionService from "@/services/QuestionService";
 
-const Form = () => {
+const Chat = () => {
   const [promptText, setPromptText] = useState<any>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isPlayAudio, setIsPlayAudio] = useState<boolean>(false);
 
+  const questionService = new QuestionService();
+
   const getResponse = async() => {
     setIsLoading(true);
-    const response = await fetch(`${process?.env?.API_URL}/questions`, {
-      method: 'POST',
-      body: JSON.stringify({
-        text: promptText
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
+    const response = await questionService.getAudio({ text: promptText });
     const audioBuffer = await response.arrayBuffer();
     const ctx = new AudioContext();
     //await ctx.resume();
@@ -71,4 +64,4 @@ const Form = () => {
   )
 }
 
-export default Form;
+export default Chat;

@@ -13,6 +13,7 @@
     "@types/react": "18.2.5",
     "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
+    "crypto-js": "^4.1.1",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.1",
     "isomorphic-fetch": "^3.0.0",
@@ -22,9 +23,11 @@
     "react-dom": "18.2.0",
     "standardized-audio-context": "^25.3.46",
     "tailwindcss": "3.3.2",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
     "@types/isomorphic-fetch": "^0.0.36"
   }
 }

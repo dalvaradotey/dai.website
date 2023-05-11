@@ -1,11 +1,11 @@
-import Image from 'next/image'
-import { useEffect } from 'react'
-import Form from './form'
+"use client"
+import { GlobalProvider } from '@/state/provider';
+import Container from './container';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-10 md:p-24">
-      <Form />
-    </main>
+    <GlobalProvider>
+      <Container />
+    </GlobalProvider>
   )
 }
