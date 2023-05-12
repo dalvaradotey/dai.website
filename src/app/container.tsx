@@ -11,12 +11,17 @@ const cookies = new Cookies()
 const Container = () => {
   const { state, setState } = useContext(GlobalContext)
   const userAccessToken = cookies?.get('userAccessToken')
+  const chatToken = cookies?.get('chatToken')
 
   useEffect(() => {    
     if (!!userAccessToken && decrypt(userAccessToken) === USER_PASSWORD) {
       setState('SET_INITIAL_STATE', { isSessionActive: true })
     }
-  }, [setState, userAccessToken])
+
+    if (!!chatToken) {
+      setState('SET_INITIAL_STATE', { chatToken })
+    }
+  }, [userAccessToken])
 
   return (
     <>

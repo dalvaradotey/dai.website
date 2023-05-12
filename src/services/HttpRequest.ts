@@ -22,12 +22,35 @@ class HttpRequest {
   buildURL(id = ''): string {
     const endpoint = id !== '' ? `${this.endpoint}/${id}` : this.endpoint
 
-    return `${this.apiURL}${endpoint}`
+    return `${this.apiURL}/${endpoint}`
+  }
+
+  async get(id: any | null) {
+    const response = await fetch(`${this.buildURL(id)}`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return await response.json();
   }
 
   async post(data: any) {
     const response = await fetch(`${this.buildURL()}`, {
       method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return await response.json();
+  }
+
+  async put(id: any | null, data: any) {
+    const response = await fetch(`${this.buildURL(id)}`, {
+      method: 'PUT',
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
